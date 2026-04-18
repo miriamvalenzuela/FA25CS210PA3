@@ -124,7 +124,25 @@ bool dfs(int r, int c,
          vector<vector<int>>& parent_c,
          int exit_r, int exit_c)
 {
-    // TODO later
+    int N = maze.size();
+    int M = maze[0].size();
+
+    // 1) Bounds check
+    if (r < 0 || r >= N || c < 0 || c >= M) {
+        return false;
+    }
+
+    // 2) Wall check (1 = wall)
+    if (maze[r][c] == 1) {
+        return false;
+    }
+
+    // 3) Visited check
+    if (visited[r][c]) {
+        return false;
+    }
+
+    // TODO: Mark visited + recurse in later commits
     return false;
 }
 
