@@ -142,6 +142,15 @@ bool dfs(int r, int c,
         return false;
     }
 
+    // 4) Mark current cell visited
+    visited[r][c] = true;
+
+    // 5) Base case - found the exit
+    if (r == exit_r && c == exit_c) {
+        return true;
+    }
+
+
     // TODO: Mark visited + recurse in later commits
     return false;
 }
