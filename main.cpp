@@ -150,8 +150,18 @@ bool dfs(int r, int c,
         return true;
     }
 
+    // 6) Explore neighbors in 4 directions (up, right, down, left)
+    for (int k = 0; k < 4; k++) {
+        int nr = r + dr[k];
+        int nc = c + dc[k];
 
-    // TODO: Mark visited + recurse in later commits
+        // Just recursing, no parent tracking yet
+        if (dfs(nr, nc, maze, visited, parent_r, parent_c, exit_r, exit_c)) {
+            return true; // if any neighbor reaches exit, bubble up true
+        }
+    }
+
+    // If none of the directions worked, no path from here
     return false;
 }
 
