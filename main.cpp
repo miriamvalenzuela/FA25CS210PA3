@@ -155,9 +155,18 @@ bool dfs(int r, int c,
         int nr = r + dr[k];
         int nc = c + dc[k];
 
-        // Just recursing, no parent tracking yet
-        if (dfs(nr, nc, maze, visited, parent_r, parent_c, exit_r, exit_c)) {
-            return true; // if any neighbor reaches exit, bubble up true
+        // Check neighbor is valid before setting parent + recursing
+        if (nr >= 0 && nr < N && nc >= 0 && nc < M) {
+            if (maze[nr][nc] == 0 && !visited[nr][nc]) {
+
+                // Track how we got to (nr, nc)
+                parent_r[nr][nc] = r;
+                parent_c[nr][nc] = c;
+
+                if (dfs(nr, nc, maze, visited, parent_r, parent_c, exit_r, exit_c)) {
+                    return true; // path found through this neighbor
+                }
+            }
         }
     }
 
