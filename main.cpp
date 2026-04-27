@@ -159,9 +159,11 @@ bool dfs(int r, int c,
         if (nr >= 0 && nr < N && nc >= 0 && nc < M) {
             if (maze[nr][nc] == 0 && !visited[nr][nc]) {
 
-                // Track how we got to (nr, nc)
-                parent_r[nr][nc] = r;
-                parent_c[nr][nc] = c;
+                // Only set the parent the first time we discover this cell
+                if (parent_r[nr][nc] == -1 && parent_c[nr][nc] == -1) {
+                    parent_r[nr][nc] = r;
+                    parent_c[nr][nc] = c;
+                }
 
                 if (dfs(nr, nc, maze, visited, parent_r, parent_c, exit_r, exit_c)) {
                     return true; // path found through this neighbor
@@ -206,6 +208,10 @@ int main() {
     vector<vector<bool>> visited(N, vector<bool>(M, false));
     vector<vector<int>> parent_r(N, vector<int>(M, -1));
     vector<vector<int>> parent_c(N, vector<int>(M, -1));
+
+    // Set entrance parent to itself (helps make parent arrays consistent)
+    parent_r[ent_r][ent_c] = ent_r;
+    parent_c[ent_r][ent_c] = ent_c;
 
     // ------------------------------------------------------
     // STUDENT WORK:
