@@ -113,10 +113,9 @@ void printPath(pair<int,int> exitcell,
     }
 }
 
-// ----------------------------------------------------------
-// STUDENTS IMPLEMENT DFS HERE
-// Add arguments, return type, and logic
-// ----------------------------------------------------------
+// DFS (Depth-First Search)
+// This function searches the maze starting from (r, c) to see if we can
+// reach the exit (exit_r, exit_c).
 bool dfs(int r, int c,
          const vector<vector<int>>& maze,
          vector<vector<bool>>& visited,
@@ -177,7 +176,7 @@ bool dfs(int r, int c,
 }
 
 // ----------------------------------------------------------
-// MAIN PROGRAM (students add DFS calls and logic)
+// MAIN PROGRAM
 // ----------------------------------------------------------
 int main() {
     int N, M;
@@ -204,7 +203,6 @@ int main() {
     // Display the maze
     printMaze(maze, ent_r, ent_c, exit_r, exit_c);
 
-    // Students must use these
     vector<vector<bool>> visited(N, vector<bool>(M, false));
     vector<vector<int>> parent_r(N, vector<int>(M, -1));
     vector<vector<int>> parent_c(N, vector<int>(M, -1));
@@ -213,16 +211,10 @@ int main() {
     parent_r[ent_r][ent_c] = ent_r;
     parent_c[ent_r][ent_c] = ent_c;
 
-    // ------------------------------------------------------
-    // STUDENT WORK:
-    // Call your DFS, track visited, and fill parent_r and parent_c
-    // ------------------------------------------------------
+    // Call DFS, track visited, and fill parent_r and parent_c
     bool found = dfs(ent_r, ent_c, maze, visited, parent_r, parent_c, exit_r, exit_c);
 
-    // ------------------------------------------------------
-    // STUDENT WORK:
     // If found, print the path
-    // ------------------------------------------------------
     if (found) {
         printPath(exitcell, parent_r, parent_c, ent_r, ent_c);
     } else {
